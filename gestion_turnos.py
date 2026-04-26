@@ -43,9 +43,13 @@ def llamar_siguiente(cola_espera):
     if dim == 0:
         raise ValueError("No hay pacientes en espera")
     pos = 0
-    while  pos < dim and cola_espera[pos]["estado"] != "Esperando":
-        cola_espera[pos]["estado"] = "Atendido"
+    encontrado = False
+    while  pos < dim and encontrado == False:
+        if cola_espera[pos]["estado"] == "Esperando":
+            cola_espera[pos]["estado"] = "Atendido"
+            encontrado = True
         pos += 1
+    return cola_espera[pos]
 
 
 
@@ -53,7 +57,8 @@ def llamar_siguiente(cola_espera):
 
 
 
-        
+
+
 
 class PacienteNoEncontrado(Exception):
     pass

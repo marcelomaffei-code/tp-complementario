@@ -12,6 +12,17 @@ from gestion_turnos import registrar_paciente,llamar_siguiente
 #def mostrar_paciente_llamado(paciente):
 #    print("Llamando al siguiente paciente: " + paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ")")
 
+def mostrar_paciente(cola_espera):
+   for paciente in cola_espera:
+        print(
+            "Paciente DNI " + paciente["dni"] +
+            ": " + paciente["nombre_completo"] +
+            " - Obra Social: " + paciente["obra_social"] +
+            " - Consultorio: " + paciente["consultorio"] +
+            " - Motivo: " + paciente["motivo_consulta"] +
+            " - Estado: " + paciente["estado"] +
+            " - Hora de llegada: " + paciente["hora_llega"]
+        )
 
 def main():
 
@@ -32,16 +43,7 @@ def main():
     except ValueError as error:
         print("Error " + str(error))
 
-    for paciente in cola_espera:
-        print(
-            "Paciente DNI " + paciente["dni"] +
-            ": " + paciente["nombre_completo"] +
-            " - Obra Social: " + paciente["obra_social"] +
-            " - Consultorio: " + paciente["consultorio"] +
-            " - Motivo: " + paciente["motivo_consulta"] +
-            " - Estado: " + paciente["estado"] +
-            " - Hora de llegada: " + paciente["hora_llega"]
-        )
+    mostrar_paciente(cola_espera)
 
     print("\n[2] ATENDIENDO PACIENTES...")
     try:
@@ -50,17 +52,8 @@ def main():
     except ValueError as error:
         print("Error: " + str(error))
 
-
-    for paciente in cola_espera:
-        print(
-            "Paciente DNI " + paciente["dni"] +
-            ": " + paciente["nombre_completo"] +
-            " - Obra Social: " + paciente["obra_social"] +
-            " - Consultorio: " + paciente["consultorio"] +
-            " - Motivo: " + paciente["motivo_consulta"] +
-            " - Hora de llegada: " + paciente["hora_llega"]
-        )
-
+    mostrar_paciente(cola_espera)
+    
 """
 
     print("\n[3] CONSULTA DE ESTADO...")
