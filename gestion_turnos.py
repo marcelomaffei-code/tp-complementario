@@ -38,15 +38,22 @@ def crear_paciente(dni, nombre_completo, obra_social, consultorio, motivo_consul
     }
     return paciente
 
-def llamar_siguiente(cola_espera, pacientes_atendidos):
-    if len(cola_espera) == 0:
+def llamar_siguiente(cola_espera):
+    dim = len(cola_espera)
+    if dim == 0:
         raise ValueError("No hay pacientes en espera")
-    paciente = cola_espera.pop(0)
-    paciente["estado"] = "Atendido"
-    pacientes_atendidos.append(paciente)
-    return paciente
+    pos = 0
+    while  pos < dim and cola_espera[pos]["estado"] != "Esperando":
+        cola_espera[pos]["estado"] = "Atendido"
+        pos += 1
 
 
+
+
+
+
+
+        
 
 class PacienteNoEncontrado(Exception):
     pass

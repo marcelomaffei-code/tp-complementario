@@ -1,5 +1,4 @@
-from gestion_turnos import registrar_paciente
-#    llamar_siguiente,
+from gestion_turnos import registrar_paciente,llamar_siguiente
  #   buscar_paciente,
   #  remover_paciente,
    # pacientes_en_espera,
@@ -31,7 +30,26 @@ def main():
         posicion = registrar_paciente(cola_espera,"26543210","Sofía Fernández","PAMI","C-107","Consulta médica","08:35")
  
     except ValueError as error:
-        print("Error de validación: " + str(error))
+        print("Error " + str(error))
+
+    for paciente in cola_espera:
+        print(
+            "Paciente DNI " + paciente["dni"] +
+            ": " + paciente["nombre_completo"] +
+            " - Obra Social: " + paciente["obra_social"] +
+            " - Consultorio: " + paciente["consultorio"] +
+            " - Motivo: " + paciente["motivo_consulta"] +
+            " - Estado: " + paciente["estado"] +
+            " - Hora de llegada: " + paciente["hora_llega"]
+        )
+
+    print("\n[2] ATENDIENDO PACIENTES...")
+    try:
+        paciente = llamar_siguiente(cola_espera)
+        paciente = llamar_siguiente(cola_espera)
+    except ValueError as error:
+        print("Error: " + str(error))
+
 
     for paciente in cola_espera:
         print(
@@ -43,23 +61,7 @@ def main():
             " - Hora de llegada: " + paciente["hora_llega"]
         )
 
-    """
-
-    print("\n[2] ATENDIENDO PACIENTES...")
-
-    try:
-        paciente = llamar_siguiente(cola_espera, pacientes_atendidos)
-        mostrar_paciente_llamado(paciente)
-
-        paciente = llamar_siguiente(cola_espera, pacientes_atendidos)
-        mostrar_paciente_llamado(paciente)
-
-    except EsperaVacia as error:
-        print("Error: " + str(error))
-
-
-
-        
+"""
 
     print("\n[3] CONSULTA DE ESTADO...")
 
