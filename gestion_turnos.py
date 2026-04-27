@@ -24,7 +24,6 @@ def registrar_paciente(cola_espera, dni, nombre_completo, obra_social, consultor
         raise ValueError("Ya existe un paciente esperando con DNI " + dni)
     paciente = crear_paciente(dni, nombre_completo, obra_social, consultorio, motivo_consulta, hora_llega)
     cola_espera.append(paciente)
-    return len(cola_espera)
 
 def crear_paciente(dni, nombre_completo, obra_social, consultorio, motivo_consulta, hora_llega):
     paciente = {
@@ -38,59 +37,38 @@ def crear_paciente(dni, nombre_completo, obra_social, consultorio, motivo_consul
     }
     return paciente
 
-def llamar_siguiente(cola_espera):
+def llamar_siguiente(cola_espera,pacientes_atendidos):
     dim = len(cola_espera)
     if dim == 0:
         raise ValueError("No hay pacientes en espera")
-    pos = 0
-    encontrado = False
-    while  pos < dim and encontrado == False:
-        if cola_espera[pos]["estado"] == "Esperando":
-            cola_espera[pos]["estado"] = "Atendido"
-            encontrado = True
-        pos += 1
-    return cola_espera[pos]
-
-
-
-
-
-
-
-
-
-
-class PacienteNoEncontrado(Exception):
-    pass
-
-
-
-
-
-
-
+    aux = cola_espera[0]
+    aux["estado"] = "Atendido"
+    pacientes_atendidos.append(aux)
+    cola_espera.pop(0)
 
 def buscar_paciente(cola_espera, dni):
-    """
-    Complejidad: O(n)
-    Busca un paciente por DNI dentro de la cola de espera.
-    Devuelve el paciente y su posición aproximada.
-    """
     dni = str(dni)
     paciente_encontrado = None
     posicion = -1
-
     i = 0
     while i < len(cola_espera):
         if cola_espera[i]["dni"] == dni and paciente_encontrado is None:
             paciente_encontrado = cola_espera[i]
             posicion = i + 1
         i = i + 1
-
     if paciente_encontrado is None:
-        raise PacienteNoEncontrado("Paciente DNI " + dni + " no encontrado en espera")
+        raise ValueError("Paciente DNI " + dni + " no encontrado en espera")
 
     return paciente_encontrado, posicion
+
+
+
+
+
+
+
+
+
 
 
 def remover_paciente(cola_espera, dni):

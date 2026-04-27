@@ -1,5 +1,4 @@
-from gestion_turnos import registrar_paciente,llamar_siguiente
- #   buscar_paciente,
+from gestion_turnos import registrar_paciente,llamar_siguiente,buscar_paciente
   #  remover_paciente,
    # pacientes_en_espera,
     #generar_reporte_ordenado,
@@ -27,50 +26,43 @@ def mostrar_paciente(cola_espera):
 def main():
 
     cola_espera = []
-    #pacientes_atendidos = []
+    pacientes_atendidos = []
+    
     print("GESTIÓN DE TURNOS")
     print("\nREGISTRANDO PACIENTES")
 
     try:
-        posicion = registrar_paciente(cola_espera,"28123456","María Pérez","OSDE","C-101","Control general","08:01")
-        posicion = registrar_paciente(cola_espera,"30456789","Juan Gómez","Swiss Medical","C-102","Dolor de cabeza","08:05")
-        posicion = registrar_paciente(cola_espera,"25789012","Laura Ruiz","PAMI","C-103","Control de presión","08:12")
-        posicion = registrar_paciente(cola_espera,"32345678","Carlos Díaz","OSDE","C-104","Consulta clínica","08:20")
-        posicion = registrar_paciente(cola_espera,"29876543","Ana Martínez","Galeno","C-105","Dolor abdominal","08:25")
-        posicion = registrar_paciente(cola_espera,"35123456","Pedro López","Medifé","C-106","Chequeo","08:30")
-        posicion = registrar_paciente(cola_espera,"26543210","Sofía Fernández","PAMI","C-107","Consulta médica","08:35")
- 
+        registrar_paciente(cola_espera,"28123456","María Pérez","OSDE","C-101","Control general","08:01")
+        registrar_paciente(cola_espera,"30456789","Juan Gómez","Swiss Medical","C-102","Dolor de cabeza","08:05")
+        registrar_paciente(cola_espera,"25789012","Laura Ruiz","PAMI","C-103","Control de presión","08:12")
+        registrar_paciente(cola_espera,"32345678","Carlos Díaz","OSDE","C-104","Consulta clínica","08:20")
+        registrar_paciente(cola_espera,"29876543","Ana Martínez","Galeno","C-105","Dolor abdominal","08:25")
+        registrar_paciente(cola_espera,"35123456","Pedro López","Medifé","C-106","Chequeo","08:30")
+        registrar_paciente(cola_espera,"26543210","Sofía Fernández","PAMI","C-107","Consulta médica","08:35")
     except ValueError as error:
         print("Error " + str(error))
 
     mostrar_paciente(cola_espera)
 
-    print("\n[2] ATENDIENDO PACIENTES...")
+    print("\nATENDIENDO PACIENTES")
     try:
-        paciente = llamar_siguiente(cola_espera)
-        paciente = llamar_siguiente(cola_espera)
+        llamar_siguiente(cola_espera,pacientes_atendidos)
+        llamar_siguiente(cola_espera,pacientes_atendidos)
     except ValueError as error:
         print("Error: " + str(error))
 
+    mostrar_paciente(pacientes_atendidos)
     mostrar_paciente(cola_espera)
-    
-"""
 
-    print("\n[3] CONSULTA DE ESTADO...")
+ #   print("\n[3] CONSULTA DE ESTADO...")
+ #   try:
+ #       paciente, posicion = buscar_paciente(cola_espera, "32345678")
+ #       print("Paciente DNI 32345678: " +paciente["nombre_completo"] +" - Estado: " +paciente["estado"] +" - Posición aproximada: " +str(posicion))
+ #   except ValueError as error:
+ #       print("Error: " + str(error))
 
-    try:
-        paciente, posicion = buscar_paciente(cola_espera, "32345678")
-        print(
-            "Paciente DNI 32345678: " +
-            paciente["nombre_completo"] +
-            " - Estado: " +
-            paciente["estado"] +
-            " - Posición aproximada: " +
-            str(posicion)
-        )
-    except PacienteNoEncontrado:
-        print("Paciente DNI 32345678: No encontrado en espera")
 
+    """
     try:
         paciente, posicion = buscar_paciente(cola_espera, "99999999")
         print(
