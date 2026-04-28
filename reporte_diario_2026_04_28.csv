@@ -1,0 +1,5 @@
+dni,nombre_completo,obra_social,consultorio,motivo_consulta,hora_llega,estado
+29876543,Ana Martínez,Galeno,C-105,Dolor abdominal,08:25,Atendido
+28123456,María Pérez,OSDE,C-101,Control general,08:01,Atendido
+32345678,Carlos Díaz,OSDE,C-104,Consulta clínica,08:20,Atendido
+30456789,Juan Gómez,Swiss Medical,C-102,Dolor de cabeza,08:05,Atendido

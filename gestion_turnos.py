@@ -45,6 +45,7 @@ def llamar_siguiente(cola_espera,pacientes_atendidos):
     aux["estado"] = "Atendido"
     pacientes_atendidos.append(aux)
     cola_espera.pop(0)
+    return aux
 
 def buscar_paciente(cola_espera, dni):
     dni = str(dni)
@@ -58,28 +59,12 @@ def buscar_paciente(cola_espera, dni):
         i = i + 1
     if paciente_encontrado is None:
         raise ValueError("Paciente DNI " + dni + " no encontrado en espera")
-
     return paciente_encontrado, posicion
 
-
-
-
-
-
-
-
-
-
-
 def remover_paciente(cola_espera, dni):
-    """
-    Complejidad: O(n)
-    Remueve de la cola un paciente que abandonó la sala.
-    """
     dni = str(dni)
     paciente_removido = None
     nueva_cola = []
-
     i = 0
     while i < len(cola_espera):
         if cola_espera[i]["dni"] == dni and paciente_removido is None:
@@ -87,47 +72,17 @@ def remover_paciente(cola_espera, dni):
         else:
             nueva_cola.append(cola_espera[i])
         i = i + 1
-
     if paciente_removido is None:
-        raise PacienteNoEncontrado("Paciente DNI " + dni + " no encontrado en espera")
-
+        raise ValueError("Paciente DNI " + dni + " no encontrado en espera")
     cola_espera.clear()
-
     j = 0
     while j < len(nueva_cola):
         cola_espera.append(nueva_cola[j])
         j = j + 1
-
     return paciente_removido
 
-
-def pacientes_en_espera(cola_espera):
-    """
-    Complejidad: O(1)
-    Devuelve la cantidad de pacientes esperando.
-    """
-    return len(cola_espera)
-
-
-def obtener_campo(paciente, campo):
-    """
-    Complejidad: O(1)
-    Devuelve el valor de un campo.
-    """
-    if campo not in paciente:
-        raise ValueError("El campo " + campo + " no existe en el paciente")
-
-    return paciente[campo]
-
-
 def generar_reporte_ordenado(pacientes, campo):
-    """
-    Complejidad: O(n²)
-    Genera una nueva lista ordenada por el campo indicado.
-    Se implementa insertion sort manual para no usar sorted() ni .sort().
-    """
     reporte = []
-
     i = 0
     while i < len(pacientes):
         paciente_actual = pacientes[i]
@@ -139,17 +94,18 @@ def generar_reporte_ordenado(pacientes, campo):
             reporte[j - 1] = reporte[j]
             reporte[j] = auxiliar
             j = j - 1
-
         i = i + 1
-
     return reporte
 
+def pacientes_en_espera(cola_espera):
+    return len(cola_espera)
+
+def obtener_campo(paciente, campo):
+    if campo not in paciente:
+        raise ValueError("El campo " + campo + " no existe en el paciente")
+    return paciente[campo]
 
 def convertir_paciente_a_linea_csv(paciente):
-    """
-    Complejidad: O(1)
-    Convierte un paciente en una línea CSV simple.
-    """
     linea = (
         paciente["dni"] + "," +
         paciente["nombre_completo"] + "," +
@@ -159,9 +115,7 @@ def convertir_paciente_a_linea_csv(paciente):
         paciente["hora_llega"] + "," +
         paciente["estado"]
     )
-
     return linea
-
 
 def exportar_reporte(pacientes, ruta_archivo):
     """
@@ -176,15 +130,9 @@ def exportar_reporte(pacientes, ruta_archivo):
             linea = convertir_paciente_a_linea_csv(pacientes[i])
             archivo.write(linea + "\n")
             i = i + 1
-
     return ruta_archivo
 
-
 def cargar_historial(ruta_archivo):
-    """
-    Complejidad: O(n)
-    Carga pacientes desde un archivo CSV.
-    """
     pacientes = []
 
     with open(ruta_archivo, "r", encoding="utf-8") as archivo:
@@ -205,7 +153,6 @@ def cargar_historial(ruta_archivo):
                     "hora_llega": datos[5],
                     "estado": datos[6]
                 }
-
                 pacientes.append(paciente)
 
             i = i + 1

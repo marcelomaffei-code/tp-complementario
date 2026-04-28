@@ -1,15 +1,7 @@
-from gestion_turnos import registrar_paciente,llamar_siguiente,buscar_paciente
-  #  remover_paciente,
-   # pacientes_en_espera,
-    #generar_reporte_ordenado,
-  #  exportar_reporte,
-  #  PacienteDuplicado,
-  #  PacienteNoEncontrado,
-  #  EsperaVacia
+from gestion_turnos import registrar_paciente,llamar_siguiente,buscar_paciente,remover_paciente,generar_reporte_ordenado,pacientes_en_espera,exportar_reporte
 
-
-#def mostrar_paciente_llamado(paciente):
-#    print("Llamando al siguiente paciente: " + paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ")")
+def mostrar_paciente_llamado(paciente):
+    print("Llamando al siguiente paciente: " + paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ")")
 
 def mostrar_paciente(cola_espera):
    for paciente in cola_espera:
@@ -54,53 +46,45 @@ def main():
     mostrar_paciente(pacientes_atendidos)
     mostrar_paciente(cola_espera)
 
- #   print("\n[3] CONSULTA DE ESTADO...")
- #   try:
- #       paciente, posicion = buscar_paciente(cola_espera, "32345678")
- #       print("Paciente DNI 32345678: " +paciente["nombre_completo"] +" - Estado: " +paciente["estado"] +" - Posición aproximada: " +str(posicion))
- #   except ValueError as error:
- #       print("Error: " + str(error))
-
-
-    """
+    print("\n[3] CONSULTA DE ESTADO...")
+    try:
+        paciente, posicion = buscar_paciente(cola_espera, "32345678")
+        print("Paciente DNI 32345678: " +paciente["nombre_completo"] +" - Estado: " +paciente["estado"] +" - Posición aproximada: " +str(posicion))
+    except ValueError as error:
+        print("Error: " + str(error))
     try:
         paciente, posicion = buscar_paciente(cola_espera, "99999999")
-        print(
-            "Paciente DNI 99999999: " +
-            paciente["nombre_completo"] +
-            " - Estado: " +
-            paciente["estado"]
-        )
-    except PacienteNoEncontrado:
+        print("Paciente DNI 99999999: " + paciente["nombre_completo"] + " - Estado: " + paciente["estado"])
+    except ValueError as error:
         print("Paciente DNI 99999999: No encontrado en espera")
 
     print("\n[4] PACIENTE ABANDONA LA SALA...")
-
     try:
         paciente = remover_paciente(cola_espera, "25789012")
         print(paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ") removido de la espera")
-    except PacienteNoEncontrado as error:
+    except ValueError as error:
         print("Error: " + str(error))
+    mostrar_paciente(cola_espera)
 
     print("\n[5] CONTINUAR ATENCIÓN...")
-
     try:
         paciente = llamar_siguiente(cola_espera, pacientes_atendidos)
         mostrar_paciente_llamado(paciente)
 
         paciente = llamar_siguiente(cola_espera, pacientes_atendidos)
         mostrar_paciente_llamado(paciente)
-
-    except EsperaVacia as error:
+    except ValueError as error:
         print("Error: " + str(error))
+
+    mostrar_paciente(pacientes_atendidos)
+    mostrar_paciente(cola_espera)   
 
     print("\n[6] GENERANDO REPORTE DIARIO (ordenado por obra social)...")
 
     reporte = generar_reporte_ordenado(pacientes_atendidos, "obra_social")
 
-    ruta_archivo = "reporte_diario_2026_04_25.csv"
+    ruta_archivo = "reporte_diario_2026_04_28.csv"
     print("Exportando reporte a: " + ruta_archivo)
-
     print("- Pacientes atendidos hoy: " + str(len(pacientes_atendidos)))
     print("- Pacientes aún en espera: " + str(pacientes_en_espera(cola_espera)))
 
@@ -111,10 +95,5 @@ def main():
         print("Reporte guardado exitosamente.")
     except OSError as error:
         print("No se pudo guardar el reporte: " + str(error))
-        
-        
-        
-    """
-
 
 main()
