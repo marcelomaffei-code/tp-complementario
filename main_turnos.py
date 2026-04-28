@@ -1,19 +1,4 @@
-from gestion_turnos import registrar_paciente,llamar_siguiente,buscar_paciente,remover_paciente,generar_reporte_ordenado,pacientes_en_espera,exportar_reporte
-
-def mostrar_paciente_llamado(paciente):
-    print("Llamando al siguiente paciente: " + paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ")")
-
-def mostrar_paciente(cola_espera):
-   for paciente in cola_espera:
-        print(
-            "Paciente DNI " + paciente["dni"] +
-            ": " + paciente["nombre_completo"] +
-            " - Obra Social: " + paciente["obra_social"] +
-            " - Consultorio: " + paciente["consultorio"] +
-            " - Motivo: " + paciente["motivo_consulta"] +
-            " - Estado: " + paciente["estado"] +
-            " - Hora de llegada: " + paciente["hora_llega"]
-        )
+from gestion_turnos import registrar_paciente,llamar_siguiente,buscar_paciente,remover_paciente,generar_reporte_ordenado,pacientes_en_espera,exportar_reporte,mostrar_paciente_llamado,mostrar_paciente
 
 def main():
 

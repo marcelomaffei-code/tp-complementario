@@ -158,3 +158,18 @@ def cargar_historial(ruta_archivo):
             i = i + 1
 
     return pacientes
+
+def mostrar_paciente_llamado(paciente):
+    print("Llamando al siguiente paciente: " + paciente["nombre_completo"] + " (DNI: " + paciente["dni"] + ")")
+
+def mostrar_paciente(cola_espera):
+   for paciente in cola_espera:
+        print(
+            "Paciente DNI " + paciente["dni"] +
+            ": " + paciente["nombre_completo"] +
+            " - Obra Social: " + paciente["obra_social"] +
+            " - Consultorio: " + paciente["consultorio"] +
+            " - Motivo: " + paciente["motivo_consulta"] +
+            " - Estado: " + paciente["estado"] +
+            " - Hora de llegada: " + paciente["hora_llega"]
+        )
