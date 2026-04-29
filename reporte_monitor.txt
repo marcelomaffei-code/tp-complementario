@@ -1,0 +1,16 @@
+==============================================================
+REPORTE DE OBSERVABILIDAD DE SERVICIOS
+==============================================================
+
+1. RESUMEN POR LENGUAJE DE SERVICIO (LANG_SERVICE):
+Lenguaje        Servicios      Total Requests      Total Downs
+--------------------------------------------------------------
+Go              2              450                 8
+Java            2              400                 25
+Python          2              350                 9
+
+2. SERVICIOS CON MAYOR Y MENOR CAÍDA:
+Mayor Caída: report-service (Java)
+Cantidad de caídas: 20
+Menor Caída: cache-service (Go)
+Cantidad de caídas: 0
