@@ -1,0 +1,4 @@
+codigo,nombre,recorrido_km,fecha_lanzamiento,pais_origen,funcion,tipo,imagenes_descargadas,errores_detectados,cantidad_sensores,resolucion_espacial,resolucion_espectral,estado
+SAT-ARG-003,Orion-3,125000.50,2022-03-15,Argentina,Observación,LEO,15000,12,8,2.5,4,Activo
+SAT-ARG-001,Aurora-1,89000.25,2021-06-10,Argentina,Meteorología,Polar,22000,5,12,1.0,8,Activo
+SAT-ARG-005,Nebula-5,200000.00,2023-01-20,Brasil,Comunicaciones,GEO,8000,30,6,5.0,2,Inactivo

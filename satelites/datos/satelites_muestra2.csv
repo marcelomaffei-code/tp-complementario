@@ -1,0 +1,3 @@
+codigo,nombre,recorrido_km,fecha_lanzamiento,pais_origen,funcion,tipo,imagenes_descargadas,errores_detectados,cantidad_sensores,resolucion_espacial,resolucion_espectral,estado
+SAT-ARG-002,Cosmos-2,150000.75,2021-11-05,Argentina,Observación,LEO,18000,8,10,1.5,6,Activo
+SAT-ARG-004,Tierra-4,95000.00,2022-08-30,Chile,Meteorología,Polar,12000,15,9,2.0,5,Activo
