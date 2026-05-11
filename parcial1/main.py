@@ -1,4 +1,4 @@
-#Parcial 1
+#Parcial 1 Marcelo Maffei
 from proceso_monitor import ordenar_registros_monitor, generar_estadistica_monitor
 
 def main():

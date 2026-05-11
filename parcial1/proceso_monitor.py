@@ -45,7 +45,7 @@ def validar_registro(registro): #valido daros
             valido = False
         return valido
     except Exception:
-        valido = False
+        return False
 
 def ordenar_registros_monitor():
     registros_ordenados = []
@@ -89,13 +89,10 @@ def escribir_linea_reporte(archivo, texto):
 def generar_estadistica_monitor(lista_registros):
     try:
         archivo = open("reporte_monitor.txt", "w", encoding="utf-8")
-        escribir_linea_reporte(archivo, "==============================================================")
         escribir_linea_reporte(archivo, "REPORTE DE OBSERVABILIDAD DE SERVICIOS")
-        escribir_linea_reporte(archivo, "==============================================================")
         escribir_linea_reporte(archivo, "")
         escribir_linea_reporte(archivo, "1. RESUMEN POR LENGUAJE DE SERVICIO (LANG_SERVICE):")
         escribir_linea_reporte(archivo, "Lenguaje        Servicios      Total Requests      Total Downs")
-        escribir_linea_reporte(archivo, "--------------------------------------------------------------")
 
         if len(lista_registros) > 0:
             mayor_caida = lista_registros[0]
@@ -127,15 +124,15 @@ def generar_estadistica_monitor(lista_registros):
                 linea = linea + str(total_downs)
                 escribir_linea_reporte(archivo, linea)
             escribir_linea_reporte(archivo, "")
-            escribir_linea_reporte(archivo, "2. SERVICIOS CON MAYOR Y MENOR CAÍDA:")
-            escribir_linea_reporte(archivo,"Mayor Caída: " + mayor_caida["name"] + " (" + mayor_caida["lang_service"] + ")")
-            escribir_linea_reporte(archivo,"Cantidad de caídas: " + str(mayor_caida["cant_down"]))
-            escribir_linea_reporte(archivo,"Menor Caída: " + menor_caida["name"] + " (" + menor_caida["lang_service"] + ")")
-            escribir_linea_reporte(archivo,"Cantidad de caídas: " + str(menor_caida["cant_down"]))
+            escribir_linea_reporte(archivo, "2. SERVICIOS CON MAYOR Y MENOR CAIDA:")
+            escribir_linea_reporte(archivo,"Mayor Caida: " + mayor_caida["name"] + " (" + mayor_caida["lang_service"] + ")")
+            escribir_linea_reporte(archivo,"Cantidad de caidas: " + str(mayor_caida["cant_down"]))
+            escribir_linea_reporte(archivo,"Menor Caida: " + menor_caida["name"] + " (" + menor_caida["lang_service"] + ")")
+            escribir_linea_reporte(archivo,"Cantidad de caidas: " + str(menor_caida["cant_down"]))
 
-            print("Servicio con mayor cantidad de caídas:")
+            print("Servicio con mayor cantidad de caidas:")
             print(mayor_caida["name"], "-", mayor_caida["lang_service"], "-", mayor_caida["cant_down"])
-            print("Servicio con menor cantidad de caídas:")
+            print("Servicio con menor cantidad de caidas:")
             print(menor_caida["name"], "-", menor_caida["lang_service"], "-", menor_caida["cant_down"])
 
         else:
